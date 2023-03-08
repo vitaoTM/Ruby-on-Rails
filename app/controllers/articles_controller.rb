@@ -13,6 +13,9 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    render plain: params[:article]
+    @article = Article.new(params.require(:article).permit(:title, :description))
+    @article.save
+    redirect_to @article # Short version redirect
+    # redirect_to article_path(@article) # Long version redirect
   end
 end
